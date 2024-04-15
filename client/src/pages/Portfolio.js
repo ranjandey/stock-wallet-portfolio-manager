@@ -21,7 +21,7 @@ const Portfolio = () => {
     fetch(
       `${API_URL}query?function=GLOBAL_QUOTE&symbol=${
         document.getElementById("symbol").value
-      }&apikey=${API_KEY}`
+      }.BSE&apikey=${API_KEY}`
     )
       .then(function (response) {
         return response.json();
@@ -30,24 +30,29 @@ const Portfolio = () => {
         let currentPrice = 0;
         if (typeof data["Global Quote"] !== "undefined") {
           currentPrice = data["Global Quote"]["05. price"];
+          console.log("price from api " + currentPrice);
         }
         let newAsset = {
           id: Number(sizeOfStocksList),
           assetName: document.getElementById("symbol").value, //sbi
-          buyingPrice: document.getElementById("buyingcost").value, //700
           shares: document.getElementById("shares").value, //100
-          currentPrice: document.getElementById("currentcost").value,
-          buyingCost: (
+          avgPrice: document.getElementById("buyingcost").value, //700
+          latestTradePrice: parseFloat(currentPrice).toFixed(2),
+          investmentValue: (
             parseFloat(document.getElementById("shares").value) *
             document.getElementById("buyingcost").value
           ).toFixed(2),
           currentValue: (
+            parseFloat(document.getElementById("shares").value) * currentPrice
+          ).toFixed(2),
+          profitAndLoss: (
+            parseFloat(document.getElementById("shares").value) * currentPrice -
             parseFloat(document.getElementById("shares").value) *
-            document.getElementById("currentcost").value
+              document.getElementById("buyingcost").value
           ).toFixed(2),
           change:
             (
-              ((parseFloat(document.getElementById("currentcost").value) -
+              ((currentPrice -
                 parseFloat(document.getElementById("buyingcost").value)) /
                 parseFloat(document.getElementById("buyingcost").value)) *
               100

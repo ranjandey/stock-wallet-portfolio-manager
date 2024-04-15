@@ -21,7 +21,7 @@ const Table = ({ stocks }) => {
       },
       {
         Header: "STOCK PRICE",
-        accessor: "currentPrice",
+        accessor: "latestTradePrice",
         width: 150,
         textAlign: "center",
         Cell: (row) => <div style={{ textAlign: "center" }}>{row.value}</div>,
@@ -49,12 +49,12 @@ const Table = ({ stocks }) => {
       },
       {
         Header: "COST PRICE",
-        accessor: "buyingCost",
+        accessor: "investmentValue",
         Footer: (info) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum, row) => parseFloat(row.values.buyingCost) + sum,
+                (sum, row) => parseFloat(row.values.investmentValue) + sum,
                 0
               ),
             [info.rows]
@@ -83,7 +83,7 @@ const Table = ({ stocks }) => {
           const totalBuyingValue = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum, row) => parseFloat(row.values.buyingCost) + sum,
+                (sum, row) => parseFloat(row.values.investmentValue) + sum,
                 0
               ),
             [info.rows]

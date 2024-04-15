@@ -1,14 +1,22 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const stockSchema = mongoose.Schema({
-    asset: String,
-    cost: String,
-    shares: String,
-    price: String,
-    value: String,
-    change: String
+  assetName: String,
+  shares: String,
+  avgPrice: String,
+  latestTradePrice: String,
+  investmentValue: String,
+  currentValue: String,
+  profitAndLoss: String,
+  change: String,
 });
 
-const StockInfo = mongoose.model('StockInfo', stockSchema);
+stockSchema.method("toJSON", function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+  return object;
+});
+
+const StockInfo = mongoose.model("StockInfo", stockSchema);
 
 export default StockInfo;

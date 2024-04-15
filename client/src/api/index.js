@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/stocks";
+const url = "http://localhost:8080/stocks";
 
 export const fetchStocks = () => axios.get(url);
 export const createStock = (newStock) => axios.post(url, newStock);

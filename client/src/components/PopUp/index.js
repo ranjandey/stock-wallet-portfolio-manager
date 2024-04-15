@@ -31,13 +31,6 @@ const PopUp = ({ togglePop, addAsset }) => {
               placeholder="Buying cost"
             />
             <br />
-            <input
-              type="text"
-              id="currentcost"
-              name="currentcost"
-              placeholder="Market cost"
-            />
-            <br />
             <button id="submit" onClick={addAsset}>
               Done
             </button>

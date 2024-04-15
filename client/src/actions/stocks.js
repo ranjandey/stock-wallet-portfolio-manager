@@ -3,8 +3,8 @@ import _stocks from "../data/stock";
 
 export const getStocks = () => async (dispatch) => {
   try {
-    //const { data } = await api.fetchStocks();
-    dispatch({ type: "FETCH_ALL", payload: _stocks });
+    const { data } = await api.fetchStocks();
+    dispatch({ type: "FETCH_ALL", payload: data });
   } catch (error) {
     console.log(error.message);
   }
@@ -12,8 +12,8 @@ export const getStocks = () => async (dispatch) => {
 
 export const createStock = (stock) => async (dispatch) => {
   try {
-    //const { data } = await api.createStock(stock);
-    dispatch({ type: "CREATE", payload: stock });
+    const { data } = await api.createStock(stock);
+    dispatch({ type: "CREATE", payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -21,7 +21,7 @@ export const createStock = (stock) => async (dispatch) => {
 
 export const deleteStock = (id) => async (dispatch) => {
   try {
-    // await api.deleteStock(id);
+    await api.deleteStock(id);
     dispatch({ type: "DELETE", payload: id });
   } catch (error) {
     console.log(error);
